@@ -2,9 +2,26 @@
 //
 
 #include <iostream>
+using namespace std;
+
+class  topologies {
+
+public:
+
+    void read_topology(){
+    
+    
+    }
+    
+
+
+
+};
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    topologies object;
+    return 0;
 }
 
