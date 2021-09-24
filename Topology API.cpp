@@ -23,7 +23,7 @@ public:
 };
 
 
-int topologies::read_topology_json(string file_name)
+int topologies::read_topology_json(string file_dir)
 { 
 
     ifstream json_file;
@@ -32,7 +32,7 @@ int topologies::read_topology_json(string file_name)
     //json_file.read((char*)&obj.file_components, sizeof(obj.file_components));
 
     Json::Value root;
-    ifstream config_doc(file_name, std::ifstream::binary);
+    ifstream config_doc(file_dir, std::ifstream::binary);
     config_doc >> root;
     //cout << obj.file_components;
     cout << root;
@@ -73,7 +73,7 @@ int topologies::show_devices_netlist(string, string)
 int main()
 {
     topologies object;
-    object.read_topology_json("topology.json");
+    object.read_topology_json("F:\Python\Master-Micro Task 2- Topology API Store, Read & Query\Topology API\topology.json");
     return 0;
 }
 
