@@ -1,9 +1,7 @@
-// Topology API.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <fstream>
 #include <json/json.h>
+
 using namespace std;
 
 class  topologies {
@@ -11,7 +9,7 @@ class  topologies {
 public:
 
     string file_components, topology, netlist_node;
-    int read_topology();
+    int read_topology_json(string);
     int write_topology();
     int show_topologies();
     int delete_topology(string);
@@ -25,16 +23,16 @@ public:
 };
 
 
-int topologies::read_topology()
+int topologies::read_topology_json(string file_name)
 { 
-    ifstream json_file;
-    json_file.open("F:\Python\Master-Micro Task 2- Topology API Store, Read & Query\Topology API\some_text.txt", ios::in);
 
+    ifstream json_file;
+  
     topologies obj;
     //json_file.read((char*)&obj.file_components, sizeof(obj.file_components));
 
     Json::Value root;
-    ifstream config_doc("topologies.json", std::ifstream::binary);
+    ifstream config_doc(file_name, std::ifstream::binary);
     config_doc >> root;
     //cout << obj.file_components;
     cout << root;
@@ -75,7 +73,7 @@ int topologies::show_devices_netlist(string, string)
 int main()
 {
     topologies object;
-    object.read_topology();
+    object.read_topology_json("topology.json");
     return 0;
 }
 
