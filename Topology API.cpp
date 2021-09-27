@@ -1,16 +1,18 @@
 #include <iostream>
 #include <fstream>
 #include <json/json.h>
+#pragma warning(disable : 4996).
 
 using namespace std;
+using namespace Json;
 
 class  topologies {
 
 public:
 
-    string file_components, topology, netlist_node;
+    string file_components, topology, netlist_node, topologies_in_memory[];
     int read_topology_json(string);
-    int write_topology();
+    int save_topology_json(string);
     int show_topologies();
     int delete_topology(string);
     int show_devices(string);
@@ -18,52 +20,68 @@ public:
 
     
 
-
-
 };
 
 
 int topologies::read_topology_json(string file_dir)
 { 
-
-    ifstream json_file;
-  
-    topologies obj;
-    //json_file.read((char*)&obj.file_components, sizeof(obj.file_components));
-
+    topologies object;
     Json::Value root;
-    ifstream config_doc(file_dir, std::ifstream::binary);
-    config_doc >> root;
-    //cout << obj.file_components;
-    cout << root;
+    Json::Reader reader;
+    std::ifstream file(file_dir);
+    file >> root;
 
+    for (int i = 0; i++ ; root.size())
+    {
+        root.getMemberNames()[i] = object.topologies_in_memory[i];
 
+    }
+    
+    //To Check for file formatting errors :)
+    if (!reader.parse(file, root)) {
+        cout << reader.getFormattedErrorMessages();
+        exit(1);
+    }
 
+    cout << "Topologies Loaded To Memory :)\nTo access them try: the show_topologies() function :)";
+    
 
     return 0;
 }
 
-int topologies::write_topology()
+int topologies::save_topology_json(string file_dir)
 {
+
+    
+
     return 0;
 }
 
 int topologies::show_topologies()
 {
+    topologies object;
+    for (int i = 0; i++; object.topologies_in_memory->size())
+    {
+        cout << "Topology", i, ":", object.topologies_in_memory[i];
+
+    }
     return 0;
 }
 
-int topologies::delete_topology(string)
+int topologies::delete_topology(string topology)
+{
+    topologies object;
+    object.topologies_in_memory->clear();
+    cout << "Topologies In Memory Cleared Successfuly :)";
+    return 0;
+}
+
+int topologies::show_devices(string topology)
 {
     return 0;
 }
 
-int topologies::show_devices(string)
-{
-    return 0;
-}
-
-int topologies::show_devices_netlist(string, string)
+int topologies::show_devices_netlist(string device, string netlist)
 {
     return 0;
 }
