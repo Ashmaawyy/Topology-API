@@ -31,7 +31,7 @@ int topologies::read_topology_json(string file_dir)
     std::ifstream file(file_dir);
     file >> root;
 
-    for (int i = 0; i++ ; root.size())
+    for (int i = 0; root.size(); i++)
     {
         root.getMemberNames()[i] = object.topologies_in_memory[i];
 
@@ -51,9 +51,15 @@ int topologies::read_topology_json(string file_dir)
 
 int topologies::save_topology_json(string file_dir)
 {
+    topologies object;
+    Json::StyledStreamWriter writer;
+    ofstream new_file;
+    Json::Value new_value;
+    new_value["id"] = object.topology;
 
-    
-
+    new_file.open("topologies_new.json");
+    writer.write(new_file, new_value);
+    new_file.close();
     return 0;
 }
 
@@ -71,8 +77,22 @@ int topologies::show_topologies()
 int topologies::delete_topology(string topology)
 {
     topologies object;
-    object.topologies_in_memory->clear();
-    cout << "Topologies In Memory Cleared Successfuly :)";
+    for(int i = 0; object.topologies_in_memory->size(); i++)
+    {
+    
+        if (object.topologies_in_memory[i] == topology)
+        {
+            object.topologies_in_memory[i].clear();
+            cout << "Topology Cleared Successfuly :)";
+
+        }
+        else
+        {
+            cout << "It Seems You Entered a wrong topology :)";
+            break;
+        }
+    }
+    
     return 0;
 }
 
@@ -92,6 +112,7 @@ int main()
 {
     topologies object;
     object.read_topology_json("F:\Python\Master-Micro Task 2- Topology API Store, Read & Query\Topology API\topology.json");
+    object.show_topologies();
     return 0;
 }
 
